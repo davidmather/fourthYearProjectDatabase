@@ -1,0 +1,26 @@
+version: '2'
+services:
+  dbMysql:
+    image: mysql:8.0.3
+    restart: always
+    container_name: mysql
+    volumes:
+      - ./data/mysql/database:/var/lib/mysql
+      - ./data/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_ROOT_USER: root
+      MYSQL_DATABASE: Microservices3
+      MYSQL_USER: Admin
+      MYSQL_PASSWORD: changeme
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
